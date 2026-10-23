@@ -1,0 +1,13 @@
+{
+  "name": "math-review-quest",
+  "version": "1.0.0",
+  "private": true,
+  "description": "2학년 덧셈·뺄셈·곱셈 복습 도트 게임과 교사 기록장 (정적 웹앱)",
+  "scripts": {
+    "start": "npx --yes serve@14.2.4 -l 5173 .",
+    "test": "node tests/generators.js && node tests/smoke.js && MOCK_DB=1 node tests/smoke.js"
+  },
+  "devDependencies": {
+    "jsdom": "24.1.3"
+  }
+}

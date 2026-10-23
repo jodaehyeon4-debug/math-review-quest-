@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>수학 복습 퀘스트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Press+Start+2P&family=IBM+Plex+Sans+KR:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar" id="topbar" hidden>
+    <div class="who"><span class="chip" id="tbName"></span><span class="tbUnit" id="tbUnit"></span></div>
+    <div class="tbr">
+      <span class="save" id="saveState"><i></i><b>저장됨</b></span>
+      <button class="pbtn sm sky" id="btnSwitch" type="button" hidden>게임 바꾸기</button>
+      <button class="pbtn sm ghost" id="btnRead" type="button">읽어 주기 켜기</button>
+      <button class="pbtn sm ghost" id="btnSound" type="button">소리 켜기</button>
+      <button class="pbtn sm coral" id="btnQuit" type="button">그만하기</button>
+    </div>
+  </header>
+
+  <section class="screen" id="scr-title">
+    <div class="logo"><span class="l1">MATH REVIEW QUEST</span><span class="l2">수학 복습</span><span class="l2 l3">퀘스트</span></div>
+    <canvas id="titleCv" class="pix" width="192" height="64"></canvas>
+    <p class="lead">몸풀기 4문제, 도전 6문제, 그다음엔 게임!</p>
+    <button class="pbtn big" id="btnStart" type="button">시작하기</button>
+    <button class="linkbtn" id="btnTeacher" type="button">선생님 기록장</button>
+    <p class="conn" id="conn">기록장 연결을 확인하고 있어요</p>
+  </section>
+
+  <section class="screen" id="scr-who" hidden>
+    <div class="pp panel">
+      <h2>내 번호를 눌러요</h2>
+      <div class="numgrid" id="numGrid"></div>
+    </div>
+    <div><button class="pbtn ghost" type="button" data-go="title">처음 화면</button></div>
+  </section>
+
+  <section class="screen" id="scr-units" hidden>
+    <h2 class="hello" id="hello"></h2>
+    <div class="pp mission" id="mission"></div>
+    <div class="units" id="unitCards"></div>
+    <div class="unitsfoot"><button class="pbtn sky" type="button" id="btnMe">내 성장 기록 보기</button></div>
+  </section>
+
+  <section class="screen" id="scr-me" hidden>
+    <h2 class="hello" id="meHello"></h2>
+    <div class="megrid" id="meGrid"></div>
+    <div><button class="pbtn ghost" type="button" id="btnMeBack">돌아가기</button></div>
+  </section>
+
+  <section class="screen" id="scr-step" hidden>
+    <div class="pp panel">
+      <div class="stephead"><span class="stepbadge" id="stepBadge">STEP 1</span><span id="stepTitle"></span><span class="pips" id="pips"></span></div>
+      <div id="stepBody"></div>
+    </div>
+    <div class="keypad" id="kpStep"></div>
+  </section>
+
+  <section class="screen" id="scr-game" hidden>
+    <div class="hud" id="hud"></div>
+    <div class="banner" id="banner"></div>
+    <div class="cvwrap"><canvas id="gameCv" class="pix" width="192" height="144"></canvas><div class="board" id="board" hidden></div><div class="overlay" id="ov" hidden></div></div>
+    <div id="ctrl"></div>
+  </section>
+
+  <section class="screen" id="scr-pick" hidden>
+    <h2 class="hello" id="pickHello"></h2>
+    <div class="units pick" id="pickCards"></div>
+  </section>
+
+  <section class="screen" id="scr-dlobby" hidden>
+    <div class="pp panel">
+      <h2>곱셈 던전 지도</h2>
+      <p>4개 구역, 20층. 위층으로 갈수록 몬스터가 많아지고 튼튼해져요.</p>
+      <div class="tower" id="tower"></div>
+      <div id="floorInfo"></div>
+      <div class="lobbyact"><button class="pbtn mint" id="btnDunGo" type="button">이어서 싸우기</button></div>
+    </div>
+    <div class="pp panel">
+      <h2>구구 펫 도감 <span id="dexCount" style="font-size:18px;color:#6b6491"></span></h2>
+      <p>단마다 숫자를 닮은 펫이 있어요. 그 단의 곱을 빠르고 정확하게 익힐수록 알에서 아기, 어린이, 완성으로 자라요.</p>
+      <div class="dex" id="dex"></div>
+      <div class="petd" id="petDetail"></div>
+    </div>
+  </section>
+
+  <section class="screen" id="scr-login" hidden>
+    <div class="pp panel login">
+      <h2>선생님 기록장</h2>
+      <p>비밀번호 4자리를 눌러요</p>
+      <div class="pin" id="pinDots"><i></i><i></i><i></i><i></i></div>
+      <p class="err" id="pinErr"></p>
+    </div>
+    <div class="keypad" id="kpLogin"></div>
+    <div><button class="pbtn ghost" type="button" data-go="title">처음 화면</button></div>
+  </section>
+
+  <section class="screen dash" id="scr-dash" hidden>
+    <header class="dhead">
+      <div><h1>선생님 기록장</h1><p id="dashConn"></p></div>
+      <div class="dact"><button class="dbtn" id="btnCsv" type="button">CSV 내려받기</button><button class="dbtn" id="btnLogout" type="button">나가기</button></div>
+    </header>
+    <nav class="tabs" id="tabs" role="tablist">
+      <button type="button" role="tab" data-tab="class">학급 현황</button>
+      <button type="button" role="tab" data-tab="student">학생별 보기</button>
+      <button type="button" role="tab" data-tab="mulmap">곱셈구구 지도</button>
+      <button type="button" role="tab" data-tab="set">설정</button>
+    </nav>
+    <div id="dashBody"></div>
+  </section>
+</div>
+
+
+<!-- 저장소 연결: js/storage-config.js 안내 참고. 비워 두면 기기 안(localStorage)에만 저장돼요. -->
+<script src="js/storage-config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
