@@ -32,7 +32,7 @@ function newUnit(){return{phase:0,step:null,game:{},stats:{kn:0,kc:0,kt:0,cn:0,c
 function newStudent(no){return{id:sid(no),no,updatedAt:Date.now(),units:{add:newUnit(),sub:newUnit(),mul:newUnit()}}}
 function normalize(d,no){if(!d||!d.units)return newStudent(no);d=clone(d);for(const u of UNITS)d.units[u]=Object.assign(newUnit(),d.units[u]||{});d.no=no;d.id=sid(no);return d}
 async function loadStudent(no){
-  await storeReady(3000);
+  await storeReady(window.MRQ_DB?10000:3000);
   const id=sid(no);let local=LS.get('dsm:'+id),remote=null;
   if(Store.db){try{const s=await Store.db.doc('students/'+id).get();if(s.exists)remote=clone(s.data())}catch(e){}}
   const d=(remote&&(!local||(remote.updatedAt||0)>=(local.updatedAt||0)))?remote:local;

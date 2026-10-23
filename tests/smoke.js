@@ -13,7 +13,7 @@ const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 let html=read('index.html')
   .replace(/<link[^>]+fonts\.g[^>]*>/g,'')
   .replace('<link rel="stylesheet" href="css/style.css">',()=>'<style>'+read('css/style.css')+'</style>')
-  .replace('<script src="js/storage-config.js"></script>',()=>'<script>'+(process.env.MOCK_DB?MOCK:read('js/storage-config.js'))+'</script>')
+  .replace('<script src="js/storage-config.js"></script>',()=>'<script>'+(process.env.MOCK_DB?MOCK:'/* 기기 저장 모드: 실제 Firebase에 연결하지 않음 */')+'</script>')
   .replace('<script src="js/app.js"></script>',()=>'<script>'+read('js/app.js')+'</script>');
 const errors=[];
 const vc=new VirtualConsole();

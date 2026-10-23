@@ -14,7 +14,12 @@
  *   MRQ_DB.collection('students').onSnapshot(next, error) → unsubscribe 함수
  * Promise를 넣어도 됩니다. 연결에 실패하면 null → 기기 저장으로 동작해요.
  */
-const MRQ_FIREBASE = null;
+const MRQ_FIREBASE = {
+  apiKey: 'AIzaSyAWR-XuqUDYk3_pWpEjFHznUyYQQlpDhck',
+  authDomain: 'grade-2-math-99c94.firebaseapp.com',
+  projectId: 'grade-2-math-99c94',
+  appId: '1:287934888683:web:8c78bed9c5b3c9adf55cae'
+};
 // 예: const MRQ_FIREBASE = { apiKey: '...', authDomain: '...firebaseapp.com', projectId: '...', appId: '...' };
 
 if (MRQ_FIREBASE) {
